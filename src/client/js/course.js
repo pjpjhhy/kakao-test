@@ -7,6 +7,11 @@ let isMapDrawn = false; // boolean
 let courseData = [];
 let markers = [];
 
+const panTo = (latitude, longitude) => {
+  const moveLatLon = new kakao.maps.LatLng(latitude, longitude);
+  map.panTo(position);
+};
+
 // 마커 그리는 함수
 const addMarker = (position) => {
   let marker = new kakao.maps.Marker({
@@ -64,6 +69,7 @@ const configLocation = () => {
   if (navigator.geolocation) {
     // web api
     navigator.geolocation.watchPosition((pos) => {
+      delMarker();
       userLatitude = pos.coords.latitude;
       userLongitude = pos.coords.longitude;
       if (!isMapDrawn) {
